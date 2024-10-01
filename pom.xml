@@ -73,6 +73,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>api_selagropauny</finalName>
     </build>
 
 </project>

@@ -1,0 +1,33 @@
+version: '2.1'
+
+services:
+  api_selagropauny:
+    build: .
+    ports:
+      - 8585:8585
+    depends_on:
+      - mysql_selagropauny
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_selagropauny:3306/bd_selagropauny
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - red_selagropauny
+
+  mysql_selagropauny:
+    image: mysql:latest
+    restart: always
+    container_name: mysql_selagropauny
+    environment:
+      - MYSQL_DATABASE=bd_selagropauny
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3307:3306  # Mapea el puerto local 3307 al puerto 3306 del contenedor
+    volumes:
+      - ~/Documents/vol:/var/lib/mysql  # Mapea al directorio correcto de MySQL
+    networks:
+      - red_selagropauny
+
+networks:
+  red_selagropauny:
+    driver: bridge
