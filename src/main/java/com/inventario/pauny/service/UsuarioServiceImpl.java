@@ -16,26 +16,25 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UsuarioServiceImpl implements IUsuarioService {
-    
+
     @Autowired
     private UsuarioRepository usuarioRepository;
-    
+
     @Override
     public List<Usuario> listar() {
         return usuarioRepository.findAll();
     }
-    
+
     @Override
     public Usuario obtener(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
-    
-    
+
     @Override
     public Usuario guardar(Usuario elemento) {
         return usuarioRepository.save(elemento);
     }
-    
+
     @Override
     public Usuario eliminar(Long id) {
         Usuario usuarioEliminado = usuarioRepository.findById(id).get();
@@ -44,13 +43,14 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public Usuario findByEmailAndPassword(String email,String password) {
+    public Usuario findByEmailAndPassword(String email, String password) {
         Usuario user = usuarioRepository.findByEmailAndPassword(email, password);
-        System.out.println("user: "+user);
+        System.out.println("user: " + user);
         return user;
     }
-    
-    
-    
-    
+
+    public Usuario findByEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
+
 }

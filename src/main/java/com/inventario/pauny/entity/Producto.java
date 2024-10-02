@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -42,6 +43,7 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String codigo = "";
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -65,6 +67,7 @@ public class Producto {
     public String getCodigo() {
         int cantCaracteres = codigo.length();
         int minCaracteres = 7;
+        System.out.println("Codigo: "+codigo);
         String resultado = "";
         if (cantCaracteres < minCaracteres) {
 

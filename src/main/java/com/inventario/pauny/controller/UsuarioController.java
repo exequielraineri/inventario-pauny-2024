@@ -152,4 +152,20 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/admin")
+    public ResponseEntity<Map<String, Object>> obtenerAdmin(@RequestParam String email) {
+        try {
+            response = new HashMap<>();
+            Usuario usuario = usuarioService.findByEmail(email);
+            if (usuario == null) {
+                response.put("data", false);
+            } else {
+                response.put("data", true);
+            }
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.put("error", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
